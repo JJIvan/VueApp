@@ -1,6 +1,6 @@
 <template>
-	<div class="header">
-		頭部
+	<div class="goods">
+		點菜組件內容
 	</div>
 </template>
 <script>

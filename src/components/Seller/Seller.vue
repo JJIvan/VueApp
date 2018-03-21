@@ -1,6 +1,6 @@
 <template>
-	<div class="header">
-		頭部
+	<div class="seller">
+		商家頁面內容
 	</div>
 </template>
 <script>
