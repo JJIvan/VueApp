@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png"> -->
 
 
-    <Myheader></Myheader>
+    <Myheader :poiInfo='poiInfo'></Myheader>
 
     <Mynav></Mynav>
 
@@ -23,7 +23,28 @@ import Mynav from './components/Nav/Nav.vue'
 export default {
   name: 'App',
   components: {
-    Myheader,Mynav
+    Myheader,
+    Mynav
+  },
+  data(){
+    return{
+      poiInfo: {}
+    }
+  },
+  created(){   //ajax
+
+    var that =this;
+
+    this.$axios.get('/api/goods')
+        .then(function (response) {
+          var dataSource = response.data;
+          if(dataSource.code == 0){
+            that.poiInfo = dataSource.data.poi_info;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
   }
 }
 </script>

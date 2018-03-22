@@ -3,15 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import Axios from 'Axios'
 
 import Goods from './components/Goods/Goods.vue'
 import Ratings from './components/Ratings/Ratings.vue'
 import Seller from './components/Seller/Seller.vue'
 
+
 Vue.config.productionTip = false
 
 
 Vue.use(VueRouter);
+
+Vue.prototype.$axios= Axios;
+
 
 const routes = [
 	{
