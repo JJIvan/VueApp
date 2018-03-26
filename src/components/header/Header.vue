@@ -3,7 +3,7 @@
 		頭部
 		<div class="top-wrapper">
 			<div class="back-wrapper">
-				<span class="icon_arrow_lift"></span>
+				<span class="icon-arrow_lift"></span>
 			</div>
 
 			<form class="search-wrapper">
@@ -39,5 +39,6 @@
 	}
 </script>
 <style>
+    @import url("../../common/styles/icon.css");
 	@import url("Header.css");
 </style>

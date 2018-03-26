@@ -12,6 +12,12 @@
 	position: absolute;
 	left: 0;
 	top: 0;
+	text-align: center;
+	line-height: 31px;
+}
+.header .top-wrapper .back-wrapper span{
+	display: inline-block;
+	color: white;
 }
 .header .top-wrapper .search-wrapper{
 	width: 100%;
