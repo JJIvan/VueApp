@@ -1,6 +1,5 @@
 <template>
 	<div class="header">
-		頭部
 		<div class="top-wrapper">
 			<div class="back-wrapper">
 				<span class="icon-arrow_lift"></span>
@@ -13,18 +12,34 @@
 
 			<div class="more-wrapper">
 				<a class="spelling-bt" href="">拼單</a>
-				<div class="more-bt"></div>
+				<div class="more-bt">
+					<i class="s-radius"></i>
+					<i class="s-radius"></i>
+					<i class="s-radius"></i>
+				</div>
 			</div>
 
 		</div>
 		
+		<!--主體內容-->
 		<div class="content-wrapper">
-			
+			<div class="icon" :style="head_bg"></div>
+			<div class="name">
+				<h3>{{poiInfo.name}}</h3>
+			</div>
+			<div class="collect">
+				<img src="../../../resource/img/star.png">
+				<span>收藏</span>
+			</div>
 		</div>
 
 		<div class="bulletin-wrapper">
 			
 		</div>
+
+	<!--背景-->
+		<div class="bg-wrapper" :style="content_bg"></div>
+
 
 	</div>
 </template>
@@ -34,6 +49,14 @@
 			poiInfo:{
 				type:Object,
 				default:{}
+			}
+		},
+		computed: {
+			content_bg(){
+				return "background-image: url("+this.poiInfo.head_pic_url+")"
+			},
+			head_bg(){
+				return "background-image: url("+this.poiInfo.pic_url+")"
 			}
 		}
 	}
