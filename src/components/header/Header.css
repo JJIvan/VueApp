@@ -228,3 +228,29 @@
 	line-height: 16px;
 	color: white; 
 }
+.header .bulletin-detail .detail-wrapper .close-wrapper{
+	padding-top: 20px;	
+	height: 40px;
+	text-align: center;
+}
+.header .bulletin-detail .detail-wrapper .close-wrapper span{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 50%;
+	font-size: 14px;
+	color: white;
+	display: inline-block;
+	background: rgba(118,118,118,0.7);
+	border: 1px solid rgba(140,140,140,0.9);
+}
+/*vue過渡效果*/
+.detail-enter-active,.detail-leave-active{
+	transition:  2s all;
+}
+.detail-enter,.detail-leave-to{
+	opacity: 0;
+}
+.detail-enter-to,.detail-leave{
+	opacity: 1;
+}
