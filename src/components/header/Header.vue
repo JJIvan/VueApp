@@ -46,9 +46,37 @@
 			</div>
 		</div>
 
-	<!--背景-->
+	    <!--背景-->
 		<div class="bg-wrapper" :style="content_bg"></div>
 
+		<!-- 公告詳情頁 -->
+ 		<div class="bulletin-detail">
+ 			<div class="detail-wrapper">
+ 				<div class="main-wrapper" :style="detail_bg">
+ 					<div class="icon" :style="head_bg"></div>
+ 					<h3 class="name">{{poiInfo.name}}</h3>
+ 					<!-- 評價 -->
+ 					<p class="tip">
+ 						{{poiInfo.min_price_tip}} <i>|</i>
+ 						{{poiInfo.shipping_fee_tip}}<i>|</i>
+ 						{{poiInfo.delivery_time_tip}}
+ 					</p> 
+ 					<p class="time">
+ 						配送時間:
+ 						{{poiInfo.shipping_time}}
+ 					</p>
+ 					<div class="discounts" v-if="poiInfo.discounts2">
+ 						<p v-for="(item, key) in poiInfo.discounts2">
+ 							<img :src="poiInfo.discounts2[key].icon_url">
+ 							<span>{{poiInfo.discounts2[key].info}}</span>
+ 						</p>
+ 					</div>
+ 				</div>
+ 				<div class="close-wrapper">
+ 					<span class="icon-close"></span>
+ 				</div>
+ 			</div>
+ 		</div>
 
 	</div>
 </template>
@@ -66,6 +94,9 @@
 			},
 			head_bg(){
 				return "background-image: url("+this.poiInfo.pic_url+")"
+			},
+			detail_bg(){
+				return "background-image: url("+this.poiInfo.poi_back_pic_url+")"
 			}
 		}
 	}
