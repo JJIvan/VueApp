@@ -28,7 +28,7 @@
 				<h3>{{poiInfo.name}}</h3>
 			</div>
 			<div class="collect">
-				<img src="../../../resource/img/star.png">
+				<img src="./star.png">
 				<span>收藏</span>
 			</div>
 		</div>
@@ -57,6 +57,11 @@
 	 					<div class="icon" :style="head_bg"></div>
 	 					<h3 class="name">{{poiInfo.name}}</h3>
 	 					<!-- 評價 -->
+						<div class="score">
+							<Star :score='poiInfo.wm_poi_score'></Star>
+							<span>{{poiInfo.wm_poi_score}}</span>
+						</div>
+
 	 					<p class="tip">
 	 						{{poiInfo.min_price_tip}} <i>|</i>
 	 						{{poiInfo.shipping_fee_tip}}<i>|</i>
@@ -83,11 +88,17 @@
 	</div>
 </template>
 <script>
+
+	import Star from "components/Star/Star"
+
 	export default{
 		data(){
 			return {
 				isShow: false //公告詳情顯示
 			}
+		},
+		components:{
+			Star
 		},
 		props: {
 			poiInfo:{

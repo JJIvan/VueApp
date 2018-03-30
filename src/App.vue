@@ -17,8 +17,8 @@
 
 <script>
 
-import Myheader from './components/header/Header.vue'
-import Mynav from './components/Nav/Nav.vue'
+import Myheader from 'components/header/Header.vue'
+import Mynav from 'components/Nav/Nav.vue'
 
 export default {
   name: 'App',

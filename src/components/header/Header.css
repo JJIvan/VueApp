@@ -27,7 +27,7 @@
 .header .top-wrapper .search-wrapper .search-icon{
     width: 28px;
     height: 31px;
-	background: url(../../../resource/img/titans_h5_search@2x.png) no-repeat 11px;
+	background: url(./titans_h5_search@2x.png) no-repeat 11px;
 	background-size: 13px 13px;
 	position: absolute;
 }
@@ -196,6 +196,21 @@
 	font-size: 15px;
 	color: white;
     margin-top: 13px;
+}
+.header .bulletin-detail .detail-wrapper .main-wrapper .score{
+	height: 10px;
+	margin-bottom: 6px;
+	text-align: center;
+	font-size: 0;
+}
+.header .bulletin-detail .detail-wrapper .main-wrapper .score .star{
+	display: inline-block;
+	margin-right: 7px;
+}
+.header .bulletin-detail .detail-wrapper .main-wrapper .score span{
+	display: inline-block;
+	font-size: 10px;
+	color: white;
 }
 .header .bulletin-detail .detail-wrapper .main-wrapper .tip{
 	font-size: 11px;
