@@ -1,7 +1,7 @@
 <template>
 	<div class="goods">
 		<!-- 分類 -->
-		<div class="menu-wrapper">
+		<div class="menu-wrapper" ref="menuScroll">
 			<ul>
 
 
@@ -26,7 +26,7 @@
 			</ul>
 		</div>
 		<!-- 商品列表 -->
-		<div class="foods-wrapper">
+		<div class="foods-wrapper" ref="foodScroll">
 			<ul>
 
 
@@ -74,6 +74,8 @@
 	</div>
 </template>
 <script>
+	import BScroll from 'better-scroll';
+
 	export default{
 		data(){
 			return {
@@ -90,7 +92,11 @@
 		          var dataSource = response.data;
 		          if(dataSource.code == 0){
 					that.container=dataSource.data.container_operation_source;
-					that.goods=dataSource.data.food_spu_tags;   
+					that.goods=dataSource.data.food_spu_tags;  
+
+					that.$nextTick( ()=>{
+						that.initScroll();
+					} ) 
 		          }
 		        })
 		        .catch(function (error) {
@@ -100,6 +106,10 @@
  		 methods:{
  		 	head_bg(imgName){
  		 		return "background-image: url("+imgName+")";
+ 		 	},
+ 		 	initScroll(){
+ 		 		new BScroll(this.$refs.menuScroll);
+ 		 		new BScroll(this.$refs.foodScroll)
  		 	}
  		 }
 	}
