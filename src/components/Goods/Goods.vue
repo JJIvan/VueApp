@@ -6,7 +6,7 @@
 
 
 				<!-- 專場 -->
-				<li class="menu-item">
+				<li class="menu-item food-list-hook">
 					<p class="text">
 						<img :src="container.tag_icon" v-if="container.tag_icon" class="icon">
 						{{container.tag_name}}
@@ -15,7 +15,7 @@
 
 
 				<!--  -->
-				<li class="menu-item" v-for="item in goods">
+				<li class="menu-item food-list-hook" v-for="item in goods">
 					<p class="text">
 						<img :src="item.icon" v-if="item.icon" class="icon">
 						{{item.name}}
@@ -80,7 +80,8 @@
 		data(){
 			return {
 				container:{},
-				goods:[]
+				goods:[],
+				listHeight:[]
 			}
 		},
 		created(){   //ajax
@@ -96,6 +97,9 @@
 
 					that.$nextTick( ()=>{
 						that.initScroll();
+
+						that.calculateHeight();
+
 					} ) 
 		          }
 		        })
@@ -110,6 +114,16 @@
  		 	initScroll(){
  		 		new BScroll(this.$refs.menuScroll);
  		 		new BScroll(this.$refs.foodScroll)
+ 		 	},
+ 		 	calculateHeight(){
+ 		 		let foodlist = this.$refs.getElementsByClassName('food-list-hook');
+ 		 		let height = 0;
+ 		 		this.listHeight.push(height);
+ 		 		for(let i=0;i<foodlist.length;i++){
+ 		 			let item =foodlist[i];
+ 		 			height += item.clientHeight;
+ 		 			this.listHeight.push(height)
+ 		 		}
  		 	}
  		 }
 	}
