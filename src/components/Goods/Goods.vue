@@ -26,7 +26,51 @@
 			</ul>
 		</div>
 		<!-- 商品列表 -->
-		<div class="foods-wrapper"></div>
+		<div class="foods-wrapper">
+			<ul>
+
+
+				<!-- 專場 -->
+				<li class="container-list">
+					<div v-for="item in container.operation_source_list">
+						<img :src="item.pic_url">
+					</div>
+				</li>
+
+
+
+				<!-- 具體分類 -->
+				<li v-for="item in goods" class="food-list">
+
+					<h3 class="title">{{item.name}}</h3>
+
+					<ul>
+						<li v-for="food in item.spus" class="food-item">
+							<div class="icon" :style="head_bg(food.picture)"></div>
+							<div class="content">
+								<h3 class="name">{{food.name}}</h3>
+								<p class="desc" v-if="food.description">{{food.description}}</p>
+								<div class="extra">
+									<span class="saled">{{food.month_saled_content}}</span>
+									<span class="praise">{{food.praise_content}}</span>
+								</div>
+								<img class="product" :src="food.product_label_picture">
+								<p class="price">
+									<span class="text">${{food.min_price}}</span>
+									<span class="unit">/{{food.unit}}</span>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</li>
+
+
+
+			</ul>
+		</div>
+
+
+
 	</div>
 </template>
 <script>
@@ -52,6 +96,11 @@
 		        .catch(function (error) {
 		          console.log(error);
 		        });
+ 		 },
+ 		 methods:{
+ 		 	head_bg(imgName){
+ 		 		return "background-image: url("+imgName+")";
+ 		 	}
  		 }
 	}
 	
