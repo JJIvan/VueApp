@@ -6,7 +6,7 @@
 
 
 				<!-- 專場 -->
-				<li class="menu-item">
+				<li class="menu-item" :class="{'current':currendIndex===0}" @click="selectMenu(0)">
 					<p class="text">
 						<img :src="container.tag_icon" v-if="container.tag_icon" class="icon">
 						{{container.tag_name}}
@@ -15,7 +15,7 @@
 
 
 				<!--  -->
-				<li class="menu-item" v-for="item in goods">
+				<li class="menu-item" v-for="(item,index) in goods" :class="{'current':currendIndex===index+1}" @click="selectMenu(index+1)">
 					<p class="text">
 						<img :src="item.icon" v-if="item.icon" class="icon">
 						{{item.name}}
@@ -31,7 +31,7 @@
 
 
 				<!-- 專場 -->
-				<li class="container-list">
+				<li class="container-list food-list-hook">
 					<div v-for="item in container.operation_source_list">
 						<img :src="item.pic_url">
 					</div>
@@ -40,7 +40,7 @@
 
 
 				<!-- 具體分類 -->
-				<li v-for="item in goods" class="food-list">
+				<li v-for="item in goods" class="food-list food-list-hook">
 
 					<h3 class="title">{{item.name}}</h3>
 
@@ -80,7 +80,11 @@
 		data(){
 			return {
 				container:{},
-				goods:[]
+				goods:[],
+				listHeight:[],
+				scrollY:0,
+				menuScroll:{},
+				foodScroll:{}
 			}
 		},
 		created(){   //ajax
@@ -96,6 +100,9 @@
 
 					that.$nextTick( ()=>{
 						that.initScroll();
+
+						that.calculateHeight();
+
 					} ) 
 		          }
 		        })
@@ -108,10 +115,50 @@
  		 		return "background-image: url("+imgName+")";
  		 	},
  		 	initScroll(){
- 		 		new BScroll(this.$refs.menuScroll);
- 		 		new BScroll(this.$refs.foodScroll)
+ 		 		this.menuScroll = new BScroll(this.$refs.menuScroll,{
+ 		 			click:true
+ 		 		});
+ 		 		this.foodScroll = new BScroll(this.$refs.foodScroll,{probeType:3});
+
+ 		 		this.foodScroll.on('scroll',(pos) => {
+ 		 			this.scrollY = Math.abs(Math.round(pos.y))
+ 		 			console.log(this.scrollY)
+ 		 		})
+ 		 	},
+ 		 	calculateHeight(){
+ 		 		let foodlist = this.$refs.foodScroll.getElementsByClassName('food-list-hook');
+ 		 		let height = 0;
+ 		 		this.listHeight.push(height);
+ 		 		for(let i=0;i<foodlist.length;i++){
+ 		 			let item =foodlist[i];
+ 		 			height += item.clientHeight;
+ 		 			this.listHeight.push(height)
+ 		 		}
+ 		 	},
+ 		 	selectMenu(index){
+ 		 		let foodlist = this.$refs.foodScroll.getElementsByClassName('food-list-hook');
+
+ 		 		let el = foodlist[index];
+
+ 		 		this.foodScroll.scrollToElement(el,500);
+ 		 	}
+ 		 },
+ 		 computed:{
+ 		 	currendIndex(){
+ 		 		for(let i=0;i<this.listHeight.length;i++){
+ 		 			let height1 = this.listHeight[i];
+ 		 			let height2 = this.listHeight[i+1];
+
+ 		 			if(!height2 || (this.scrollY>=height1 && this.scrollY<height2)){
+ 		 				return i;
+ 		 			}
+
+ 		 		}
+ 		 		return 0;
+
  		 	}
  		 }
+
 	}
 	
 </script>
