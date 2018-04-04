@@ -68,6 +68,8 @@
 
 			</ul>
 		</div>
+		<!-- 購物車 -->
+		<Shopcart></Shopcart>
 
 
 
@@ -75,6 +77,7 @@
 </template>
 <script>
 	import BScroll from 'better-scroll';
+	import Shopcart from 'components/Shopcart/Shopcart.vue'
 
 	export default{
 		data(){
@@ -157,6 +160,10 @@
  		 		return 0;
 
  		 	}
+ 		 },
+ 		 components:{
+ 		 	Shopcart,
+ 		 	BScroll
  		 }
 
 	}
