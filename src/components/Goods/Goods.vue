@@ -60,6 +60,10 @@
 									<span class="unit">/{{food.unit}}</span>
 								</p>
 							</div>
+
+							<div class="cartcontrol-wrapper">
+								<Cartcontrol></Cartcontrol>
+							</div>
 						</li>
 					</ul>
 				</li>
@@ -77,7 +81,8 @@
 </template>
 <script>
 	import BScroll from 'better-scroll';
-	import Shopcart from 'components/Shopcart/Shopcart.vue'
+	import Shopcart from 'components/Shopcart/Shopcart.vue';
+	import Cartcontrol from 'components/Cartcontrol/Cartcontrol.vue';
 
 	export default{
 		data(){
@@ -165,7 +170,8 @@
  		 },
  		 components:{
  		 	Shopcart,
- 		 	BScroll
+ 		 	BScroll,
+ 		 	Cartcontrol
  		 }
 
 	}
