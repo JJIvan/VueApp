@@ -69,7 +69,7 @@
 			</ul>
 		</div>
 		<!-- 購物車 -->
-		<Shopcart></Shopcart>
+		<Shopcart :shippingfeetip="poiInfo.shipping_fee_tip" :minpricetip='poiInfo.min_price_tip'></Shopcart>
 
 
 
@@ -84,6 +84,7 @@
 			return {
 				container:{},
 				goods:[],
+				poiInfo:{},
 				listHeight:[],
 				scrollY:0,
 				menuScroll:{},
@@ -100,6 +101,7 @@
 		          if(dataSource.code == 0){
 					that.container=dataSource.data.container_operation_source;
 					that.goods=dataSource.data.food_spu_tags;  
+					that.poiInfo=dataSource.data.poi_info;
 
 					that.$nextTick( ()=>{
 						that.initScroll();
