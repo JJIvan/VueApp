@@ -1,17 +1,17 @@
 <template>
-	<div class="shopcart">
+	<div class="shopcart" :class="{'highlight':totalCount>0}">
 		<div class="content-left">
-			<div class="logo-wrapper">
-				<span class="icon-shopping_cart logo"></span>
-				<!-- <i class="num">6</i> -->
+			<div class="logo-wrapper" :class="{'highlight':totalCount>0}">
+				<span class="icon-shopping_cart logo" :class="{'highlight':totalCount>0}"></span>
+				<i class="num" v-show="totalCount">{{totalCount}}</i>
 			</div>
 			<div class="desc-wrapper">
-				<!-- <p class="total-price">$158</p> -->
-				<p class="tip">另需{{shippingfeetip}}</p>
+				<p class="total-price" v-show="totalPrice">${{totalPrice}}</p>
+				<p class="tip" :class="{'highlight':totalCount>0}">另需{{shippingfeetip}}</p>
 			</div>
 		</div>
-		<div class="content-right">
-			{{minpricetip}}
+		<div class="content-right" :class="{'highlight':totalCount>0}">
+			{{payStr}}
 		</div>
 	</div>
 </template>
@@ -31,7 +31,9 @@
 			selectFoods:{
 				type:Array,
 				default(){
-					return [];
+					return [
+
+					];
 				}
 			}
 		},
@@ -51,6 +53,14 @@
 					total += food.min_price * food.count;
 				} )
 				return total;
+			},
+			// 結算按鈕
+			payStr(){
+				if(this.totalCount > 0){
+					return "去結算";
+				}else{
+					return this.minpricetip;
+				}
 			}
 		}
 	}
