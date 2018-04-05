@@ -62,7 +62,7 @@
 							</div>
 
 							<div class="cartcontrol-wrapper">
-								<Cartcontrol></Cartcontrol>
+								<Cartcontrol :food='food'></Cartcontrol>
 							</div>
 						</li>
 					</ul>
@@ -73,7 +73,7 @@
 			</ul>
 		</div>
 		<!-- 購物車 -->
-		<Shopcart :shippingfeetip="poiInfo.shipping_fee_tip" :minpricetip='poiInfo.min_price_tip'></Shopcart>
+		<Shopcart :shippingfeetip="poiInfo.shipping_fee_tip" :minpricetip='poiInfo.min_price_tip' :selectFoods="selectFoods"></Shopcart>
 
 
 
@@ -128,7 +128,10 @@
  		 		this.menuScroll = new BScroll(this.$refs.menuScroll,{
  		 			click:true
  		 		});
- 		 		this.foodScroll = new BScroll(this.$refs.foodScroll,{probeType:3});
+ 		 		this.foodScroll = new BScroll(this.$refs.foodScroll,{
+ 		 			probeType:3,
+ 		 			click:true
+ 		 		});
 
  		 		this.foodScroll.on('scroll',(pos) => {
  		 			this.scrollY = Math.abs(Math.round(pos.y))
@@ -166,6 +169,18 @@
  		 		}
  		 		return 0;
 
+ 		 	},selectFoods(){
+ 		 		let foods = [];
+ 		 		this.goods.forEach( (good)=>{
+ 		 			good.spus.forEach( (food)=>{
+ 		 				if(food.count>0){
+ 		 					foods.push(food);
+ 		 					console.log(food)
+ 		 				}
+ 		 			});
+ 		 		});
+
+ 		 		return foods;
  		 	}
  		 },
  		 components:{
