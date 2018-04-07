@@ -20,6 +20,7 @@
 						<img :src="item.icon" v-if="item.icon" class="icon">
 						{{item.name}}
 					</p>
+					<i class="num" v-show="calculateCount(item.spus)">{{calculateCount(item.spus)}}</i>
 				</li>
 
 
@@ -60,6 +61,10 @@
 									<span class="unit">/{{food.unit}}</span>
 								</p>
 							</div>
+
+							<div class="cartcontrol-wrapper">
+								<Cartcontrol :food='food'></Cartcontrol>
+							</div>
 						</li>
 					</ul>
 				</li>
@@ -69,7 +74,7 @@
 			</ul>
 		</div>
 		<!-- 購物車 -->
-		<Shopcart :shippingfeetip="poiInfo.shipping_fee_tip" :minpricetip='poiInfo.min_price_tip'></Shopcart>
+		<Shopcart :shippingfeetip="poiInfo.shipping_fee_tip" :minpricetip='poiInfo.min_price_tip' :selectFoods="selectFoods"></Shopcart>
 
 
 
@@ -77,7 +82,8 @@
 </template>
 <script>
 	import BScroll from 'better-scroll';
-	import Shopcart from 'components/Shopcart/Shopcart.vue'
+	import Shopcart from 'components/Shopcart/Shopcart.vue';
+	import Cartcontrol from 'components/Cartcontrol/Cartcontrol.vue';
 
 	export default{
 		data(){
@@ -123,7 +129,10 @@
  		 		this.menuScroll = new BScroll(this.$refs.menuScroll,{
  		 			click:true
  		 		});
- 		 		this.foodScroll = new BScroll(this.$refs.foodScroll,{probeType:3});
+ 		 		this.foodScroll = new BScroll(this.$refs.foodScroll,{
+ 		 			probeType:3,
+ 		 			click:true
+ 		 		});
 
  		 		this.foodScroll.on('scroll',(pos) => {
  		 			this.scrollY = Math.abs(Math.round(pos.y))
@@ -146,6 +155,15 @@
  		 		let el = foodlist[index];
 
  		 		this.foodScroll.scrollToElement(el,500);
+ 		 	},
+ 		 	calculateCount(spus){
+ 		 		let count = 0;
+ 		 		spus.forEach((food)=>{
+ 		 			if(food.count>0){
+ 		 				count += food.count;
+ 		 			};
+ 		 		});
+ 		 		return count;
  		 	}
  		 },
  		 computed:{
@@ -161,11 +179,24 @@
  		 		}
  		 		return 0;
 
+ 		 	},selectFoods(){
+ 		 		let foods = [];
+ 		 		this.goods.forEach( (good)=>{
+ 		 			good.spus.forEach( (food)=>{
+ 		 				if(food.count>0){
+ 		 					foods.push(food);
+ 		 					console.log(food)
+ 		 				}
+ 		 			});
+ 		 		});
+
+ 		 		return foods;
  		 	}
  		 },
  		 components:{
  		 	Shopcart,
- 		 	BScroll
+ 		 	BScroll,
+ 		 	Cartcontrol
  		 }
 
 	}
